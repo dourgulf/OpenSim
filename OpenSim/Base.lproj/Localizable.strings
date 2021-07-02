@@ -33,4 +33,4 @@
 "MenuHeader.Actions" = "Actions";
 "MenuHeader.Extensions" = "Extensions";
 "MenuHeader.AppInformation" = "App Information";
-"Extension.MultipleIM5Database" = "Opening multiple IM5 databases, please select one"
+"Extension.MultipleIM5Database" = "Opening multiple IM5 databases, please select one";
