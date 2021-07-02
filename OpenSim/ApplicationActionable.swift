@@ -22,4 +22,11 @@ protocol ApplicationActionable {
     
     func perform()
     
+    var subAction: [ApplicationActionable] { get }
+}
+
+extension ApplicationActionable {
+    var subAction: [ApplicationActionable] {
+        return []
+    }
 }
