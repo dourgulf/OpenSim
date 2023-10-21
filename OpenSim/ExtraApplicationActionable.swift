@@ -16,20 +16,20 @@ protocol ExtraApplicationActionable: ApplicationActionable {
 
 extension ExtraApplicationActionable {
     
-    var appPath: String? {
-        return NSWorkspace.shared.absolutePathForApplication(withBundleIdentifier: appBundleIdentifier)
+    var applicationUrl: URL? {
+        return NSWorkspace.shared.urlForApplication(withBundleIdentifier: appBundleIdentifier)
     }
     
     var icon: NSImage? {
-        return appPath.flatMap { (path) -> NSImage? in
-            let image = NSWorkspace.shared.icon(forFile: path)
+        return applicationUrl.flatMap { (pathUrl) -> NSImage? in
+            let image = NSWorkspace.shared.icon(forFile: pathUrl.path)
             image.size = NSSize(width: 16, height: 16)
             return image
         }
     }
     
     var isAvailable: Bool {
-        return appPath != nil
+        return applicationUrl != nil
     }
     
 }

@@ -49,16 +49,29 @@ extension Device {
         }
     }
     
-    public func containerURLForApplication(_ application: Application) -> URL? {
-        let URL = URLHelper.containersURLForUDID(UDID)
+    fileprivate func URLForIdentifier(_ id: String, base URL: URL) -> URL? {
         let directories = try? FileManager.default.contentsOfDirectory(at: URL, includingPropertiesForKeys: nil, options: .skipsSubdirectoryDescendants)
         return directories?.filter({ (dir) -> Bool in
-            if let contents = NSDictionary(contentsOf: dir.appendingPathComponent(".com.apple.mobile_container_manager.metadata.plist")),
-                let identifier = contents["MCMMetadataIdentifier"] as? String, identifier == application.bundleID {
-                return true
+            guard let contents = NSDictionary(contentsOf: dir.appendingPathComponent(".com.apple.mobile_container_manager.metadata.plist"))
+            else {
+                return false
             }
-            return false
+            guard let identifier = contents["MCMMetadataIdentifier"] as? String
+            else {
+                return false
+            }
+            return identifier == id
         }).first
+    }
+    
+    public func containerURLForApplication(_ application: Application) -> URL? {
+        let contianerURL = URLHelper.containersURLForUDID(UDID)
+        return URLForIdentifier(application.bundleID, base: contianerURL)
+    }
+    
+    public func URLForAppGroups(_ group: String, application: Application) -> URL? {
+        let appGroupsURL = URLHelper.appGroupsURLForUDID(UDID)
+        return URLForIdentifier(group, base: appGroupsURL)
     }
     
     func launch() {

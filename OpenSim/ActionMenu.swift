@@ -14,15 +14,20 @@ final class ActionMenu: NSMenu {
     
     private static let standardActions: [ApplicationActionable.Type] = [
         RevealInFinderAction.self,
+        RRevealAppGroupsInFinderAction.self,
         CopyToPasteboardAction.self,
         OpenInTerminalAction.self,
         LaunchAction.self,
-        UninstallAction.self
+        UninstallAction.self,
     ]
     
     private static let extraActions: [ApplicationActionable.Type] = [
         OpenInItermAction.self,
-        OpenRealmAction.self
+        OpenRealmAction.self,
+        OpenIM5DatabaseGlobalAction.self,
+        OpenIM5DatabaseCNAction.self,
+        OpenIM5DatabaseUSAction.self,
+        OpenIM5DatabaseDevAction.self,
     ]
     
     private var appInfoItem: NSMenuItem {

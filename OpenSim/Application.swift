@@ -31,7 +31,25 @@ final class Application {
         }
         return url
     }
+    
+//    var appGroupsUrl: URL? {
+//        guard let url = device.appGroupsURLForApplication(self),
+//              FileManager.default.fileExists(atPath: url.path)
+//        else {
+//            return nil
+//        }
+//        return url
+//    }
 
+    func URLForAppGroups(_ group: String) -> URL? {
+        guard let url = device.URLForAppGroups(group, application: self),
+              FileManager.default.fileExists(atPath: url.path)
+        else {
+            return nil
+        }
+        return url
+    }
+    
     init?(device: Device, url: Foundation.URL) {
         self.device = device
         guard let contents = try? FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: [.skipsSubdirectoryDescendants, .skipsHiddenFiles]),

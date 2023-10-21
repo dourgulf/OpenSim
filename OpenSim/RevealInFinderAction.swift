@@ -8,17 +8,17 @@
 
 import Cocoa
 
-final class RevealInFinderAction: ApplicationActionable {
+class RevealInFinderAction: ApplicationActionable {
     
     var application: Application?
     
-    let title = UIConstants.strings.actionRevealInFinder
+    var title: String { UIConstants.strings.actionRevealInFinder }
     
     let icon = templatize(#imageLiteral(resourceName: "reveal"))
     
     let isAvailable: Bool = true
     
-    init(application: Application) {
+    required init(application: Application) {
         self.application = application
     }
     
@@ -28,4 +28,13 @@ final class RevealInFinderAction: ApplicationActionable {
         }
     }
     
+}
+
+class RRevealAppGroupsInFinderAction: RevealInFinderAction {
+    override var title: String { UIConstants.strings.actionRevealAppGroupsInFinder }
+    override func perform() {
+        if let url = application?.URLForAppGroups("group.test.appgroups") {
+            NSWorkspace.shared.open(url)
+        }
+    }
 }

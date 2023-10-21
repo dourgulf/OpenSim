@@ -13,6 +13,7 @@ struct URLHelper {
     static let devicesPathComponent = "Developer/CoreSimulator/Devices/"
     static let applicationStatesComponent = "data/Library/FrontBoard/applicationState.plist"
     static let containersComponent = "data/Containers/Data/Application"
+    static let appGroupsComponent = "data/Containers/Shared/AppGroup"
     
     static let deviceSetFileName = "device_set.plist"
     static let deviceFileName = "device.plist"
@@ -41,6 +42,10 @@ struct URLHelper {
     
     static func containersURLForUDID(_ UDID: String) -> URL {
         return deviceURLForUDID(UDID).appendingPathComponent(containersComponent, isDirectory: true)
+    }
+    
+    static func appGroupsURLForUDID(_ UDID: String) -> URL {
+        return deviceURLForUDID(UDID).appendingPathComponent(appGroupsComponent, isDirectory: true)
     }
     
 }
